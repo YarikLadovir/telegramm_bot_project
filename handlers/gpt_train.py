@@ -136,7 +136,7 @@ async def make_training(callback_query: CallbackQuery):
     try:
         df = pd.read_excel("user_registration_data.xlsx")
         df['user_id'] = pd.to_numeric(df['user_id'], errors='coerce')
-        user_data = df[df['user_id'] == user_id].iloc[0]  # Get the first row as a Series
+        user_data = df[df['user_id'] == user_id].iloc[0] 
 
         training_type_mapping = {
             "interval_training": "интервальную",
@@ -155,8 +155,8 @@ async def make_training(callback_query: CallbackQuery):
                         f" цель пробежать - {user_data['target_distance']},"
                         f" желаемая частота тренировок - {user_data['training_frequency']}")
         response = get_gpt_response(user_id, user_message)
-        await callback_query.message.answer(response)  # Используем answer вместо reply
-        await callback_query.answer()  # Отправляем подтверждение о получении callback
+        await callback_query.message.answer(response)  
+        await callback_query.answer()  
 
     except FileNotFoundError:
         await callback_query.message.answer("Ошибка: Файл user_registration_data.xlsx не найден.")
